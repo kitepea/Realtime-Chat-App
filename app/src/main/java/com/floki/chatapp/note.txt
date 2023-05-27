@@ -1,0 +1,14 @@
+- sp (scale-independent pixels) là đơn vị đo kích thước chữ, được sử dụng để đảm bảo rằng kích thước
+ chữ được hiển thị đồng nhất trên các thiết bị với mật độ điểm ảnh (dpi) khác nhau.
+ Giá trị sp được dựa trên giá trị dpi của thiết bị hiện tại, do đó kích thước chữ sẽ tự động thay
+ đổi khi người dùng thay đổi kích thước chữ trong cài đặt hệ thống của thiết bị.
+
+- dp (density-independent pixels) là đơn vị đo kích thước của các thành phần giao diện, như hình ảnh
+ và nút, và cũng được sử dụng để đảm bảo rằng các thành phần này được hiển thị đồng nhất trên các
+ thiết bị có mật độ điểm ảnh khác nhau. Giá trị dp cũng được dựa trên giá trị dpi của thiết bị hiện
+  tại, nhưng khác với sp, giá trị dp sẽ không thay đổi khi người dùng thay đổi kích thước chữ trong
+  cài đặt hệ thống của thiết bị.
+
+- FrameLayouts let you pile each view on top of the one below. This can also be achieved with a
+RelativeLayout.
+

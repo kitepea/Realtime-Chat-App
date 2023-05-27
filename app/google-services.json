@@ -1,0 +1,47 @@
+{
+  "project_info": {
+    "project_number": "704160927027",
+    "project_id": "chat-app-b1e12",
+    "storage_bucket": "chat-app-b1e12.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:704160927027:android:1a1ff21152e0c286a60246",
+        "android_client_info": {
+          "package_name": "com.floki.chatapp"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "704160927027-0slrhuj6rp9mov7s3dgvpmev8akqubca.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.floki.chatapp",
+            "certificate_hash": "8ce7c5159ad065a09072273efa654ed43057e041"
+          }
+        },
+        {
+          "client_id": "704160927027-i137832uf4qv87osfdshkkfeit3mq174.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyAKf0LKLLYZlAITACZY4AUEw9xUb-BaUIg"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "704160927027-i137832uf4qv87osfdshkkfeit3mq174.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
