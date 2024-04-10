@@ -6,8 +6,8 @@ import androidx.fragment.app.FragmentManager;
 import androidx.lifecycle.Lifecycle;
 import androidx.viewpager2.adapter.FragmentStateAdapter;
 
-import com.floki.chatapp.Fragment.ChatFragment;
-import com.floki.chatapp.Fragment.PeopleFragment;
+import com.floki.chatapp.Fragments.ChatFragment;
+import com.floki.chatapp.Fragments.PeopleFragment;
 
 public class MyViewPagerAdapter extends FragmentStateAdapter {
 

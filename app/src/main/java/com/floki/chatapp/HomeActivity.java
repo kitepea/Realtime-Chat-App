@@ -31,6 +31,7 @@ public class HomeActivity extends AppCompatActivity {
 
         viewPager.setOffscreenPageLimit(2);
         viewPager.setAdapter(new MyViewPagerAdapter(getSupportFragmentManager(), new Lifecycle() {
+            // Follow and manage cycle of fragment
             @Override
             public void addObserver(@NonNull LifecycleObserver observer) {
 

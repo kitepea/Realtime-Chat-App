@@ -1,8 +1,7 @@
-package com.floki.chatapp.Fragment;
+package com.floki.chatapp.Fragments;
 
 import androidx.lifecycle.ViewModelProvider;
 
-import android.content.Context;
 import android.os.Bundle;
 
 import androidx.annotation.NonNull;
@@ -12,7 +11,6 @@ import androidx.recyclerview.widget.DividerItemDecoration;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -35,7 +33,6 @@ import java.text.SimpleDateFormat;
 import java.util.Objects;
 
 public class ChatFragment extends Fragment {
-    public FragmentChatBinding binding;
     SimpleDateFormat simpleDateFormat = new SimpleDateFormat("HH:mm dd/MM/yyyy");
     FirebaseRecyclerAdapter adapter;
     private ChatViewModel mViewModel;
@@ -68,7 +65,9 @@ public class ChatFragment extends Fragment {
 
             @NonNull
             @Override
+            // Tạo 1 viewholder mới khi RecyclerView cần,            RecyclerView
             public ChatInfoHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
+                // Tạo 1 view từ file layout
                 View itemView = LayoutInflater.from(parent.getContext())
                         .inflate(R.layout.layout_chat_item, parent, false);
                 return new ChatInfoHolder(itemView);

@@ -6,7 +6,7 @@
     android:layout_height="match_parent"
     android:id="@+id/parent_view"
     tools:context=".HomeActivity">
-    
+    <!-- Viewpager to store and manage state of fragment    -->
     <androidx.viewpager2.widget.ViewPager2
         android:layout_width="match_parent"
         android:layout_height="match_parent"

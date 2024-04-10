@@ -16,6 +16,10 @@
 
     <style name="LoginTheme" parent="FirebaseUI">
 
+    <!-- colorPrimary – The color of the app bar.
+        colorPrimaryDark – The color of the status bar and contextual app bars; this is normally a dark version of colorPrimary.
+        colorAccent – The color of UI controls such as check boxes, radio buttons, and edit text boxes.
+    -->
         <item name="colorPrimary">@color/colorPrimary</item>
         <item name="colorPrimaryDark">@color/colorPrimaryDark</item>
         <item name="colorAccent">@color/colorAccent</item>
@@ -45,4 +49,5 @@
     </style>
 
     <style name="Apptheme.PopupOverlay" parent="Theme.MaterialComponents.Light" />
+
 </resources>

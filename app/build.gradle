@@ -54,7 +54,7 @@ dependencies {
     implementation 'com.firebaseui:firebase-ui-auth:8.0.2'
     implementation 'com.firebaseui:firebase-ui-database:8.0.2'
 
-    //
+    // Miscellaneous
     implementation 'androidx.viewpager2:viewpager2:1.0.0'
 
     implementation 'com.karumi:dexter:6.2.3'

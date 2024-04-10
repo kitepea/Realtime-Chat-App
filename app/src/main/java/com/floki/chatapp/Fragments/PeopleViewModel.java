@@ -1,4 +1,4 @@
-package com.floki.chatapp.Fragment;
+package com.floki.chatapp.Fragments;
 
 import androidx.lifecycle.ViewModel;
 

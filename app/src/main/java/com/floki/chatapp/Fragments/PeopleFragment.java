@@ -1,4 +1,4 @@
-package com.floki.chatapp.Fragment;
+package com.floki.chatapp.Fragments;
 
 import android.content.Intent;
 import android.os.Bundle;
@@ -26,12 +26,10 @@ import com.floki.chatapp.R;
 import com.floki.chatapp.ViewHolder.UserViewHolder;
 import com.floki.chatapp.databinding.FragmentChatBinding;
 import com.floki.chatapp.databinding.FragmentPeopleBinding;
-import com.floki.chatapp.databinding.LayoutPeopleBinding;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.Query;
 
-import java.util.ConcurrentModificationException;
 import java.util.Objects;
 
 public class PeopleFragment extends Fragment {
@@ -56,16 +54,21 @@ public class PeopleFragment extends Fragment {
         RecyclerView recycle_people = itemView.findViewById(R.id.recycler_people);
         Query query = FirebaseDatabase.getInstance()
                 .getReference()
-                .child(Common.USER_REFERENCES);
-        FirebaseRecyclerOptions<UserModel> options = new FirebaseRecyclerOptions
+                .child(Common.USER_REFERENCES); // access child
+        // Config the adapter options
+        FirebaseRecyclerOptions<UserModel> options = new FirebaseRecyclerOptions // using recycler view as default
                 .Builder<UserModel>()
-                .setQuery(query, UserModel.class)
+                .setQuery(query, UserModel.class) // each entity in the query result will be converted into an Usermodel entity
                 .build();
         adapter = new FirebaseRecyclerAdapter<UserModel, UserViewHolder>(options) {
+            // FirebaseRecyclerAdapter to connect firebase with recycle view
+            // UserViewHolder: name, imageView profile, etc,..., use to update those view infos
 
             @NonNull
             @Override
+            // Tạo 1 viewholder mới khi RecyclerView cần,            RecyclerView
             public UserViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
+                // Tạo 1 view từ file layout
                 View view = LayoutInflater.from(parent.getContext())
                         .inflate(R.layout.layout_people, parent, false);
                 return new UserViewHolder(view);

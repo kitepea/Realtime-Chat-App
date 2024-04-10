@@ -58,7 +58,7 @@ public class MainActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_main);
+//        setContentView(R.layout.activity_main);
         init();
     }
 
@@ -72,6 +72,7 @@ public class MainActivity extends AppCompatActivity {
         userRef = database.getReference(com.floki.chatapp.Common.Common.USER_REFERENCES);
         listener = myFirebaseAuth -> {
             Dexter.withContext(this)
+            //Dexter là một thư viện trong Android giúp đơn giản hóa quá trình yêu cầu quyền tại thời gian chạy
                     .withPermissions(Arrays.asList(
                             android.Manifest.permission.CAMERA,
 //                            android.Manifest.permission.READ_EXTERNAL_STORAGE,
@@ -94,24 +95,38 @@ public class MainActivity extends AppCompatActivity {
                         public void onPermissionRationaleShouldBeShown(List<PermissionRequest> list, PermissionToken permissionToken) {
 
                         }
+    /*Thus, to summarize
 
+    shouldShowRequestPermissionRationale will return true only if the application was launched earlier and the user "denied" the permission WITHOUT checking "never ask again".
+    In other cases (app launched first time, or the app launched earlier too and the user denied permission by checking "never ask again"), the return value is false.
+    */
                     }).check();
         };
     }
+
     private void showLoginLayout() {
-        startActivityForResult(AuthUI.getInstance()
-                .createSignInIntentBuilder()
-                .setIsSmartLockEnabled(false)
+        startActivityForResult(AuthUI.getInstance() // bắt đầu activity đăng nhập và mong đợi kết quả trả về
+                .createSignInIntentBuilder() // tạo intent builder để điều chỉnh quá trình đăng nhập
+                .setIsSmartLockEnabled(false) // vô hiệu hóa smartlock
                 .setTheme(R.style.LoginTheme)
                 .setAvailableProviders(providers).build(), LOGIN_REQUEST_CODE);
+        // Từ 1 SignInIntentBuilder, build() được gọi để tạo ra 1 Intent
     }
+
     private void checkUserFromFirebase() {
+    // Add a new child node with the specified name to your data structure
         userRef.child(Objects.requireNonNull(FirebaseAuth.getInstance().getCurrentUser()).getUid())
+    /*  the value from the local cache to be returned immediately, instead of checking for an updated value on the server
+        useful for data that only needs to be loaded once and isn't expected to change frequently or require active listening
+        such as when initializing a UI element that you don't expect to change
+        it executes onDataChange method immediately and after executing that method once, it stops listening to the reference location it is attached to.*/
                 .addListenerForSingleValueEvent(new ValueEventListener() {
                     @Override
                     public void onDataChange(@NonNull DataSnapshot snapshot) {
                         if (snapshot.exists()) {
                             UserModel userModel = snapshot.getValue(UserModel.class);
+                            // organize the data contained in this snapshot into a class of your choosing: UserModel
+                            // chuyển đổi dữ liệu từ snapshot thành một đối tượng của lớp UserModel
                             userModel.setUid(snapshot.getKey());
                             goToHomeActivity(userModel);
                         } else showRegisterLayout();
@@ -125,6 +140,7 @@ public class MainActivity extends AppCompatActivity {
     }
 
     private void showRegisterLayout() {
+        //  Java (and Kotlin) syntax does not support getting the class just by using the class name, so .class to force
         startActivity(new Intent(MainActivity.this, RegisterActivity.class));
         finish();
     }
@@ -133,18 +149,24 @@ public class MainActivity extends AppCompatActivity {
         com.floki.chatapp.Common.Common.currentUser = userModel;
         startActivity(new Intent(MainActivity.this, HomeActivity.class));
         finish();
+        // if you call finish() after an intent you can't go back to the previous activity with the "back" button
+        // lets the system know that the programmer wants the current Activity to be finished. And hence, it calls up onDestroy() after that.
     }
 
     @Override
     protected void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
-        if (requestCode == LOGIN_REQUEST_CODE){
+        if (requestCode == LOGIN_REQUEST_CODE) {
+            // IDP: indentity provider
+            // data: là đối tượng chứa dữ liệu ở Activity B.
             IdpResponse response = IdpResponse.fromResultIntent(data);
-            if (resultCode == RESULT_OK){
+            if (resultCode == RESULT_OK) {
+                // Tác vụ đã thành công
                 FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
-            }
-            else
+            } else
                 Toast.makeText(MainActivity.this, "[ERROR]" + response.getError(), Toast.LENGTH_SHORT).show();
         }
     }
+    // Phương thức startActivityForResult() được sử dụng khi Activity A start Activity B và muốn nhận dữ liệu trả về từ Activity B đó.
+    // Phương thức onActivityResult() là phương thức xử lý kết quả trả về, từ Activity đã mở thông qua phương thức startActivityForResult()
 }

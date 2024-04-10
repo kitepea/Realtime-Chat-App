@@ -1,18 +1,14 @@
 package com.floki.chatapp;
 
-import androidx.annotation.NonNull;
-import androidx.appcompat.app.AppCompatActivity;
-
 import android.content.Intent;
 import android.os.Bundle;
-import android.view.View;
 import android.widget.Button;
 import android.widget.Toast;
 
+import androidx.appcompat.app.AppCompatActivity;
+
 import com.floki.chatapp.Common.Common;
 import com.floki.chatapp.Model.UserModel;
-import com.google.android.gms.tasks.OnFailureListener;
-import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.android.material.datepicker.MaterialDatePicker;
 import com.google.android.material.textfield.TextInputEditText;
 import com.google.firebase.auth.FirebaseAuth;
@@ -47,7 +43,8 @@ public class RegisterActivity extends AppCompatActivity {
 
         database = FirebaseDatabase.getInstance();
         userRef = database.getReference(Common.USER_REFERENCES);
-        materialDatePicker.addOnPositiveButtonClickListener(selection -> {
+        materialDatePicker.addOnPositiveButtonClickListener(selection -> { // selection(millis): time user picked from DatePickerDialog
+                          // After confirm valid selection
             calendar.setTimeInMillis(selection);
             edt_date_of_birth.setText(simpleDateFormat.format(selection));
             isSelectBirthDate = true;
@@ -74,7 +71,9 @@ public class RegisterActivity extends AppCompatActivity {
 
         btn_register.setOnClickListener(v -> {
             if (!isSelectBirthDate){
-                Toast.makeText(RegisterActivity.this, "Please enter birthdate", Toast.LENGTH_SHORT).show();
+//                Toast.makeText(RegisterActivity.this, "Please enter birthdate", Toast.LENGTH_SHORT).show();
+                Toast.makeText(RegisterActivity.this, "Please enter birthdate", Toast.LENGTH_LONG).show();
+                return;
             }
         UserModel userModel = new UserModel();
         //Personal
@@ -87,9 +86,7 @@ public class RegisterActivity extends AppCompatActivity {
 
         userRef.child(userModel.getUid())
                 .setValue(userModel)
-                .addOnFailureListener(e -> {
-                    Toast.makeText(this, e.getMessage(), Toast.LENGTH_SHORT).show();
-                })
+                .addOnFailureListener(e -> Toast.makeText(this, e.getMessage(), Toast.LENGTH_SHORT).show())
                 .addOnSuccessListener(unused -> {
                     Toast.makeText(this, "Register success!", Toast.LENGTH_SHORT).show();
                     Common.currentUser = userModel;
