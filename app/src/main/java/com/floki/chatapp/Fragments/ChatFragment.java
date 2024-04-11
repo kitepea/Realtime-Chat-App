@@ -33,7 +33,7 @@ import java.text.SimpleDateFormat;
 import java.util.Objects;
 
 public class ChatFragment extends Fragment {
-    SimpleDateFormat simpleDateFormat = new SimpleDateFormat("HH:mm dd/MM/yyyy");
+    SimpleDateFormat simpleDateFormat = new SimpleDateFormat("dd/MM/yyyy");
     FirebaseRecyclerAdapter adapter;
     private ChatViewModel mViewModel;
 
