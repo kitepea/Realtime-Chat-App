@@ -78,7 +78,6 @@ public class PeopleFragment extends Fragment {
             protected void onBindViewHolder(@NonNull UserViewHolder holder, int position, @NonNull UserModel model) {
                 if (!Objects.equals(adapter.getRef(position).getKey(), FirebaseAuth.getInstance().getCurrentUser().getUid()))
                 {
-                    //Hide yourself
                     ColorGenerator generator = ColorGenerator.MATERIAL;
                     int color = generator.getColor(FirebaseAuth.getInstance().getCurrentUser().getUid());
                     TextDrawable.IBuilder builder = TextDrawable.builder()
@@ -127,7 +126,6 @@ public class PeopleFragment extends Fragment {
         mViewModel = new ViewModelProvider(this).get(PeopleViewModel.class);
         // TODO: Use the ViewModel
     }
-
     @Override
     public void onStart() {
         super.onStart();

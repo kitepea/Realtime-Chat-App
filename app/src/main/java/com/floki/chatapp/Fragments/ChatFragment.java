@@ -75,8 +75,8 @@ public class ChatFragment extends Fragment {
 
             @Override
             protected void onBindViewHolder(@NonNull ChatInfoHolder holder, int position, @NonNull ChatInfoModel model) {
-                if (!Objects.equals(adapter.getRef(position)
-                        .getKey(), FirebaseAuth.getInstance().getCurrentUser().getUid()))
+                // Display list of chatter, if this user id == current user id, then not display
+                if (!Objects.equals(adapter.getRef(position).getKey(), FirebaseAuth.getInstance().getCurrentUser().getUid()))
                 {
                     ColorGenerator generator = ColorGenerator.MATERIAL;
                     int color = generator.getColor(FirebaseAuth.getInstance().getCurrentUser().getUid());
@@ -84,6 +84,8 @@ public class ChatFragment extends Fragment {
                             .withBorder(4)
                             .endConfig()
                             .round();
+                    // if i create this chat, then display the name of my friend, if he create the chat, display the name of the create
+                    // name in the ChatInfoModel create name, which is him
                     String displayName = FirebaseAuth.getInstance().getCurrentUser().getUid()
                             .equals(model.getCreateId()) ? model.getFriendName() : model.getCreateName();
 
